@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #000000;
+            text-align: center;
+            padding: 8px;
+        }
+    </style>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Search All Tasks</title>
+    </head>
+
+    <body>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+
+            <button type="submit">Search</button>
+        </form>
+
+        <table class="table table-sm">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>State</th>
+                
+            </tr>
+            
+            {% for task in tasks_list %}
+                <tr>
+                    <td>{{ task.get_name }}</td>
+                    <td>{{ task.get_description }}</td>
+                    <td>{{ task.get_deadline }}</td>
+                    <td>{{ task.get_state }}</td>
+                    
+                </tr>
+            {% endfor %}
+        </table>
+        <p><a href="../../../">Home</a></p>
+    </body>
+</html>

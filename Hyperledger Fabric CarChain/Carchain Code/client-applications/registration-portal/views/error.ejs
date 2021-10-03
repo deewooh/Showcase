@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+<% if (customer.role === 'CUST') { %>
+<%- include('partials/navigation_cust') %>
+<% } else { %>
+<%- include('partials/navigation_admin') %>
+<% } %>
+
+<div class="container centered">
+    <h1 class="portal-h1">Oops, an error occurred</h1>
+    <%= error_message %>
+</div>
+
+<%- include('partials/footer') %>

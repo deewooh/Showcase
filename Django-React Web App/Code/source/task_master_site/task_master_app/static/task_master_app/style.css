@@ -1,0 +1,236 @@
+@font-face {
+    font-family: Coverface;
+    src: url('../../static/task_master_app/Coverface SE FS.ttf') format('truetype');
+    /* Cannot use {% static task_master_app/Coverface SE FS.ttf %} inside a CSS file */
+}
+
+/* @font-face {
+    font-family: Coverface-bold;
+    src: url('../../static/task_master_app/Coverface SE Bold FS.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Coverface-light;
+    src: url('../../static/task_master_app/Coverface SE Light FS.ttf') format('truetype');
+} */
+
+* {
+    font-family: Coverface, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #133c55;
+    font-weight: lighter;
+}
+
+body {
+    text-align: center;
+}
+
+.body-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80vh;
+    
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #133c55;
+    text-align: center;
+    font-size: 48px;
+}
+
+.h1-large {
+    font-size: 72px;
+}
+
+h2 {
+    color: #449dd1;
+    text-align: center;
+    font-size: 36px;
+}
+
+h3 {
+    text-align: center;
+    font-size: 30px;
+}
+
+p {
+    text-align: center;
+    font-size: 20px;
+}
+
+.btn {
+    align-items: center;
+    text-align: center;
+    padding: 5px 10px;
+    color: #FFFFFF;
+    background-color: #449dd1;
+    font-size: 16px;
+}
+
+.btn:hover {
+    color: #FFFFFF;
+    background-color: #ff9b42;
+}
+
+
+.btn-large {
+    padding: 15px 50px;
+    background-color: #449dd1;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn-delete {
+    background-color: #a188a6;
+}
+
+.btn-delete:hover {
+    background: red;
+}
+
+/* Remove formating for hyperlinks */
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover {
+    text-decoration: none;
+    color: #ff9b42;
+}
+a:active { text-decoration: none; }
+a {color: #133c55;}
+
+
+table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td, th {
+    text-align: center;
+    padding: 8px;
+}
+
+.table-list td {
+    border: 1px solid #133c55;
+}
+
+.table-list tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.table-list tr:hover {
+    background-color: #dddddd;
+}
+
+.table-list th {
+    border: 1px solid #133c55;
+    background-color: #133c55;
+    color: #FFFFFF;
+}
+
+.table-form label {
+    font-size: 18px;
+}
+
+/* Description field */
+.table-form textarea {
+    font-size: 18px;
+    height: 100px;
+    resize: vertical;
+}
+
+.table-form input {
+    width: 100%;
+    padding: 8px 15px;
+    margin: 2px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.table-form select {
+    appearance: none;
+    width: 100%;
+    padding: 8px 15px;
+    margin: 2px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #999999;
+    background: #eeeeee;
+}
+
+.connections a {
+    font-size: 20px;
+}
+
+/*
+Navigation bar
+Reference: https://www.w3schools.com/Css/css_navbar_horizontal.asp
+*/
+.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #133c55;
+
+    position: -webkit-sticky; /* For Safari web browser */
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.nav-bar li {
+    float: left;
+}
+
+.nav-bar li:last-child {
+    border-right: none;
+}
+
+.nav-bar .nav-bar-logout {
+    float: right;
+}
+
+.nav-bar .nav-bar-logout a {
+    background-color: #a188a6;
+    font-weight: bold;
+}
+
+.nav-bar li a {
+    display: block; /* Makes the entire link area clickable */
+    color: #FFFFFF; /* Overrides the usual orange colour for links */
+    text-align: center;
+    padding: 15px 20px;
+}
+
+.nav-bar-active {
+    background-color: #449dd1;
+}
+
+/* When hovering over the navigation buttons */
+.nav-bar li a:hover {
+    background-color: #ff9b42;
+}
+
+/* Large logo on the title screen */
+.title-logo {
+    max-width: 100%;
+    height: auto;
+    padding: 50px 10px;
+}
+
+/* Small logo on the navigation bar */
+.nav-bar-logo {
+    display: block;
+    height: 23.5px;
+    width: auto;
+}

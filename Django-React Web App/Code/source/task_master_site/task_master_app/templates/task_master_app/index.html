@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task Master</title>
+    <link rel="stylesheet" href="{% static 'task_master_app/style.css' %}">
+  </head>
+  <body>
+    {% if u.is_authenticated %}
+      <ul class="nav-bar">
+        <li class="nav-bar-active"><a href="{% url 'home' %}"><img class="nav-bar-logo" src="{% static 'task_master_app/Logo Light.png' %}"></a></li>
+        <li><a href="{% url 'tasks' u.get_username %}">My Tasks</a></li>
+        <li><a href="{% url 'create_task' %}">Create Task</a></li>
+        <li><a href="{% url 'connections' u.get_username %}">My Connections</a></li>
+        <li><a href="{% url 'add_connection' u.get_username %}">Add Connection</a></li>
+        <li><a href="{% url 'user_details' u.get_username %}">Account Details</a></li>
+        <li><a href="{% url 'edit_user' %}">Edit Account</a></li>
+        <li class="nav-bar-logout"><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+
+      <h1>Dashboard</h1>
+      <p>Welcome, {{ u.profile.get_name }}</p>
+      <div>
+        <h2>Tasks</h2>
+        <p><a href="{% url 'tasks' u.get_username %}">My Tasks</a></p>
+        <p><a href="{% url 'create_task' %}">Create Task</a></p>
+      </div>
+      
+      <div>
+        <h2>Networking</h2>
+        <p><a href="{% url 'connections' u.get_username %}">My Connections</a></p>
+        <p><a href="{% url 'add_connection' u.get_username %}">Add Connection</a></p>
+      </div>
+
+      <div>
+        <h2>My Account</h2>
+        <p><a href="{% url 'user_details' u.get_username %}">Account Details</a></p>
+        <p><a href="{% url 'edit_user' %}">Edit Account</a></p>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+      </div>
+    {% else %}
+      <img class="title-logo" src="{% static 'task_master_app/Logo Dark.png' %}">
+      <h1>Get Started</h1>
+      <div>
+        <p><a href="{% url 'login' %}">Login</a></p>
+        <p><a href="{% url 'signup' %}">Signup</a></p>
+      </div>
+    {% endif %}
+  </body>
+</html>

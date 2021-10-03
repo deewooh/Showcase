@@ -1,0 +1,120 @@
+---
+swagger: "2.0"
+info:
+  description: "---\n## Overview\n### Vehicle API for COMP6452 Project 2.\n\n<p>\n\
+    \  This API provides endpoints to allow car manufacturers to add Vehicles to CarChain.</br>\n\
+    \  Endpoint for retrieving all Vehicles on CarChain is provided for testing purposes.\n\
+    </p>\n\n---\n"
+  version: "1.0.0"
+  title: "Vehicle API"
+host: "localhost:8080"
+basePath: "/v1"
+schemes:
+- "http"
+paths:
+  /vehicles:
+    get:
+      tags:
+      - "Vehicle"
+      summary: "Used to retrieve all Vehicles on CarChain."
+      operationId: "getVehicles"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Response contains a list of Vehicles."
+          schema:
+            $ref: "#/definitions/VehicleList"
+      x-swagger-router-controller: "Vehicle"
+    post:
+      tags:
+      - "Vehicle"
+      summary: "Used by the manufacturer to add a new vehicle to CarChain."
+      operationId: "addVehicle"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Vehicle object containing the Vehicle details."
+        required: true
+        schema:
+          $ref: "#/definitions/Vehicle"
+      responses:
+        "201":
+          description: "Vehicle created."
+          schema:
+            $ref: "#/definitions/Vehicle"
+        "400":
+          description: "Invalid input."
+          schema:
+            $ref: "#/definitions/InvalidInputError"
+        "500":
+          description: "Unexpected failure in the service layer."
+          schema:
+            $ref: "#/definitions/UnexpectedServiceError"
+      x-swagger-router-controller: "Vehicle"
+definitions:
+  Vehicle:
+    type: "object"
+    required:
+    - "make"
+    - "model"
+    - "model_year"
+    - "vin"
+    properties:
+      vin:
+        type: "string"
+        example: "1G6CD6988G4334344"
+      make:
+        type: "string"
+        example: "Honda"
+      model:
+        type: "string"
+        example: "Civic Touring"
+      model_year:
+        type: "integer"
+        format: "int64"
+        example: 2021
+      body_style:
+        type: "string"
+        example: "Sedan"
+    example:
+      model_year: 2021
+      vin: "1G6CD6988G4334344"
+      model: "Civic Touring"
+      body_style: "Sedan"
+      make: "Honda"
+  VehicleList:
+    type: "array"
+    items:
+      $ref: "#/definitions/Vehicle"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      type:
+        type: "string"
+      message:
+        type: "string"
+  InvalidInputError:
+    allOf:
+    - $ref: "#/definitions/Error"
+    - {}
+    example:
+      code: 400
+      type: "InvalidInputError"
+      message: "The following mandatory fields were not provided: %field_name_1%,\
+        \ %field_name_2%"
+  UnexpectedServiceError:
+    allOf:
+    - $ref: "#/definitions/Error"
+    - {}
+    example:
+      code: 500
+      type: "UnexpectedServiceError"
+      message: "The following unexpected runtime error has occurred: %error%"

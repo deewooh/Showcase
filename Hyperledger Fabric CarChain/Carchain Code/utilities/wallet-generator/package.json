@@ -1,0 +1,23 @@
+{
+    "name": "wallet-generator",
+    "version": "1.0.0",
+    "description": "Used to create wallets for client applications.",
+    "engines": {
+        "node": ">=12",
+        "npm": ">=5"
+    },
+    "engineStrict": true,
+    "author": "llricho",
+    "license": "Apache-2.0",
+    "scripts": {
+        "prestart": "npm install",
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "fabric-ca-client": "^2.2.4",
+        "fabric-network": "^2.2.4"
+    },
+    "devDependencies": {
+        "rimraf": "^3.0.2"
+    }
+}

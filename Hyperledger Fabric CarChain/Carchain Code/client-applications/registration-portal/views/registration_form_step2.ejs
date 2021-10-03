@@ -1,0 +1,84 @@
+<%- include('partials/header') %>
+
+    <%- include('partials/navigation_cust') %>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <img src="img/progressbar-2.png" alt="">
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="form-inline" action="/registrationform2" method="POST">
+                                <div class="form-group">
+                                    <label for="inputVIN" class="m-2"><b>VIN or chassis/frame number:</b></label>
+                                    <input type="text" class="form-control m-2" id="inputVIN"
+                                        placeholder="4Y1SL65848Z411439" name="inputVIN" 
+                                        <% if (locals.prevVin) { %> value="<%= prevVin %>" <% } %> 
+                                        >
+                                </div>
+                                <button type="submit" class="btn btn-dark m-2">Find</button>
+                            </form>
+                            <% if (locals.error) { %>
+                                <div class="row justify-content-center"><b>Vehicle does not exist</b></div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% if (locals.data) { %>
+                <div class="row justify-content-center">
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Property</th>
+                                            <th scope="col">Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% json_data=JSON.parse(data); %>
+                                            <tr>
+                                                <td>VIN</td>
+                                                <td>
+                                                    <%= json_data.vin %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Make</td>
+                                                <td>
+                                                    <%= json_data.make %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Model</td>
+                                                <td>
+                                                    <%= json_data.model %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Body Style</td>
+                                                <td>
+                                                    <%= json_data.body_style %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Model Year</td>
+                                                <td>
+                                                    <%= json_data.model_year %>
+                                                </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                                <form action="/registrationform3">
+                                    <button type="submit" class="btn btn-dark">Next</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+
+        <%- include('partials/footer') %>

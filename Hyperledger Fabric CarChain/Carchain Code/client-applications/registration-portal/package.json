@@ -1,0 +1,29 @@
+{
+  "name": "registration-portal",
+  "version": "1.0.0",
+  "description": "Self service portal for car registration.",
+  "main": "app.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "llricho",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-fileupload": "^1.2.1",
+    "express-session": "^1.17.2",
+    "fabric-ca-client": "^2.2.4",
+    "fabric-network": "^2.2.4",
+    "lodash": "^4.17.11",
+    "nodemailer": "^6.6.3",
+    "sqlite3": "^5.0.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "vehicle-api",
+  "version": "1.0.0",
+  "description": "--- ## Overview ### Vehicle API for COMP6452 Project 2.  <p>   This API provides endpoints to allow car manufacturers to add Vehicles to CarChain.</br>   Endpoint for retrieving all Vehicles on CarChain is provided for testing purposes. </p>  --- ",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.10.1",
+    "fabric-ca-client": "^2.2.4",
+    "fabric-network": "^2.2.4"
+  }
+}

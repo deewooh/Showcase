@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="../img/car.png" width="40" height="40" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/registration">Registration</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/fines">Fines</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/vehicles">Vehicles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        Logged in as <b>customer</b>: <%= customer.first_name %> <%= customer.last_name %>
+      </span>
+    </div>
+  </nav>

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Connections</title>
+        <link rel="stylesheet" href="{% static 'task_master_app/style.css' %}">
+    </head>
+
+    <body>
+        <ul class="nav-bar">
+            <li><a href="{% url 'home' %}"><img class="nav-bar-logo" src="{% static 'task_master_app/Logo Light.png' %}"></a></li>
+            <li><a href="{% url 'tasks' profile.get_name %}">My Tasks</a></li>
+            <li><a href="{% url 'create_task' %}">Create Task</a></li>
+            <li class="nav-bar-active"><a href="{% url 'connections' profile_nav.get_name %}">My Connections</a></li>
+            <li><a href="{% url 'add_connection' profile_nav.get_name %}">Add Connection</a></li>
+            <li><a href="{% url 'user_details' profile_nav.get_name %}">Account Details</a></li>
+            <li><a href="{% url 'edit_user' %}">Edit Account</a></li>
+            <li class="nav-bar-logout"><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+
+        <h1>Connections List</h1>
+        <h2>{{ profile.get_name }}</h2>
+
+        <div class="connections">
+            {% for profile in connections_list %}
+                <a href="{% url 'user_details' profile.get_name %}">{{ profile.get_name }}</a>
+                <br>
+            {% endfor %}
+        </div>
+
+        <h3>Incoming Connection Requests</h3>
+        <div class="connections">
+            {% for connection in incoming_list %}
+                <a href="{% url 'pending' profile.get_name connection.id %}">{{ connection.get_sender.get_name }}</a>
+                <br>
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,247 @@
+---
+swagger: "2.0"
+info:
+  description: "---\n## Overview\n### Police API for COMP6452 Project 2.\n\n<p>\n\
+    \   This API provides endpoints to allow police to:</br>\n  - View violations\
+    \ for a vehicle</br>\n  - Create violation</br>\n  - Mark violation as payed</br>\n\
+    \  - Dispute a violation</br>\n</p>\n\n---\n"
+  version: "1.0.0"
+  title: "Police API"
+host: "localhost:8081"
+basePath: "/v1"
+schemes:
+- "http"
+paths:
+  /violations:
+    get:
+      tags:
+      - "Violation"
+      summary: "Used to retrieve all violations in the blockchain"
+      operationId: "getAllViolations"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Response contains a list of all violations"
+          schema:
+            $ref: "#/definitions/ViolationList"
+      x-swagger-router-controller: "Violation"
+  /violations/{regoId}:
+    get:
+      tags:
+      - "Violation"
+      summary: "Used to retrieve violations for a particular vehicle"
+      operationId: "getViolationsByRegoId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "regoId"
+        in: "path"
+        description: "rego id of the vehicle"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Response contains a list of violations for a rego id"
+          schema:
+            $ref: "#/definitions/ViolationList"
+        "400":
+          description: "Invalid input."
+          schema:
+            $ref: "#/definitions/InvalidInputError"
+        "500":
+          description: "Unexpected failure in the service layer."
+          schema:
+            $ref: "#/definitions/UnexpectedServiceError"
+      x-swagger-router-controller: "Violation"
+  /violation/{violationId}:
+    get:
+      tags:
+      - "Violation"
+      summary: "Used to retrieve a specific violation on CarChain"
+      operationId: "getViolationByViolationId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "violationId"
+        in: "path"
+        description: "id of the violation to retrieve"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Response contains a violation in JSON format"
+          schema:
+            $ref: "#/definitions/Violation"
+        "400":
+          description: "Invalid input."
+          schema:
+            $ref: "#/definitions/InvalidInputError"
+        "404":
+          description: "Not found"
+        "500":
+          description: "Unexpected failure in the service layer."
+          schema:
+            $ref: "#/definitions/UnexpectedServiceError"
+      x-swagger-router-controller: "Violation"
+  /violation:
+    post:
+      tags:
+      - "Violation"
+      summary: "Used by the police to create a violation against a vehicle"
+      operationId: "addViolation"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Violation object containing the Violation details."
+        required: true
+        schema:
+          $ref: "#/definitions/Violation"
+      responses:
+        "201":
+          description: "Violation created."
+          schema:
+            $ref: "#/definitions/Violation"
+        "400":
+          description: "Invalid input."
+          schema:
+            $ref: "#/definitions/InvalidInputError"
+        "500":
+          description: "Unexpected failure in the service layer."
+          schema:
+            $ref: "#/definitions/UnexpectedServiceError"
+      x-swagger-router-controller: "Violation"
+  /violation/{violationId}/payFine:
+    put:
+      tags:
+      - "Violation"
+      summary: "Change status of violation to paid"
+      operationId: "payFine"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "violationId"
+        in: "path"
+        description: "id of the violation to pay the fine for"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Fine payed successfully"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Violation not found"
+      x-swagger-router-controller: "Violation"
+  /violation/{violationId}/disputeFine:
+    put:
+      tags:
+      - "Violation"
+      summary: "Change status of violation to disputed"
+      operationId: "disputeFine"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "violationId"
+        in: "path"
+        description: "id of the violation to dispute"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Fine successfully disputed"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Violation not found"
+      x-swagger-router-controller: "Violation"
+definitions:
+  Violation:
+    type: "object"
+    required:
+    - "Code"
+    - "Description"
+    - "Fine_amount"
+    - "Occurred_date"
+    - "Rego_reference"
+    properties:
+      Violation_id:
+        type: "string"
+        example: "1"
+      Code:
+        type: "string"
+        example: "Rule 20 - 2A"
+      Description:
+        type: "string"
+        example: "Driving 5km/h over limit"
+      Occurred_date:
+        type: "string"
+        example: "16-07-2021"
+      Fine_amount:
+        type: "integer"
+        example: "123"
+      Rego_reference:
+        type: "string"
+        example: "123ABC"
+      Status:
+        type: "string"
+        example: "Unpaid"
+    example:
+      Code: "Rule 20 - 2A"
+      Description: "Driving 5km/h over limit"
+      Occurred_date: "16-07-2021"
+      Fine_amount: 123
+      Rego_reference: "123ABC"
+  ViolationList:
+    type: "array"
+    items:
+      $ref: "#/definitions/Violation"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+    example:
+      code: 0
+      type: "type"
+      message: "message"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      type:
+        type: "string"
+      message:
+        type: "string"
+  InvalidInputError:
+    allOf:
+    - $ref: "#/definitions/Error"
+    - {}
+    example:
+      code: 400
+      type: "InvalidInputError"
+      message: "The following mandatory fields were not provided: %field_name_1%,\
+        \ %field_name_2%"
+  UnexpectedServiceError:
+    allOf:
+    - $ref: "#/definitions/Error"
+    - {}
+    example:
+      code: 500
+      type: "UnexpectedServiceError"
+      message: "The following unexpected runtime error has occurred: %error%"

@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<%- include('partials/navigation_cust') %>
+
+<div class="container">
+  <h1 class="portal-h1">Fines Summary</h1>
+  <table class="table table-striped table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Code</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+        <th scope="col">Fine</th>
+        <th scope="col">Reg</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% json_data = JSON.parse(data); %>
+    <%if (json_data.length >0) { %>
+        <% json_data.forEach(function(item){ %>
+            <tr>
+              <td><%= item.Violation_id %></td>
+              <td><%= item.Code %></td>
+              <td><%= item.Description %></td>
+              <td><%= item.Occurred_date %></td>
+              <td>$<%= item.Fine_amount %></td>
+              <td><%= item.Rego_reference %></td>
+              <td><%= item.Status %></td>
+              <% if (item.Status == "Unpaid") { %>
+                <td><a href="/pay/<%= item.Violation_id %>" class="tableButton">Pay</a></td>
+              <% } else { %>
+                <td>NA</td>
+              <% } %>
+            </tr>
+        <% })
+    } else{ %>
+            <tr>
+                <td colspan="5">No Violations</td>  
+            </tr>
+    <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

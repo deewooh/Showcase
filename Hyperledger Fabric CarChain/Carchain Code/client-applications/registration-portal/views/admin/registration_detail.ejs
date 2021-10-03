@@ -1,0 +1,147 @@
+<%- include('../partials/header') %>
+
+    <%- include('../partials/navigation_admin') %>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <h1>Registration Application for <%= JSON.parse(registration_data).registrationID %>
+                </h1>
+                <div class="col col-md-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <b>Vehicle Details</b>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Property</th>
+                                        <th scope="col">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% vehicle_json=JSON.parse(vehicle_data); %>
+                                        <tr>
+                                            <td>VIN</td>
+                                            <td>
+                                                <%= vehicle_json.vin %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Make</td>
+                                            <td>
+                                                <%= vehicle_json.make %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Model</td>
+                                            <td>
+                                                <%= vehicle_json.model %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Body Style</td>
+                                            <td>
+                                                <%= vehicle_json.body_style %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Model Year</td>
+                                            <td>
+                                                <%= vehicle_json.model_year %>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col col-md-7">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <b>Customer Details</b>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Property</th>
+                                        <th scope="col">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Customer ID</td>
+                                        <td>
+                                            <%= person_data.crn %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>
+                                            <%= person_data.first_name %>
+                                                <%= person_data.last_name %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date of Birth</td>
+                                        <td>
+                                            <%= person_data.dob %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>
+                                            <%= person_data.address %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td>
+                                            <%= person_data.email %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone</td>
+                                        <td>
+                                            <%= person_data.phone %>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row links">
+                <div class="col">
+                    <div class="card h-30">
+                        <div class="card-body">
+                            <h3>Proof of Registration Entitlement (PORE)</h3>
+                            <% if (locals.pore) { %>
+                                <a href="/<%= pore.filePath %>" target="_blank" class="detailsButton">
+                                    <%= pore.fileName %>
+                                </a>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row links">
+                <div class="col">
+                    <div class="card h-30">
+                        <div class="card-body">
+                            <form class="form-inline" action="/reject" method="POST">
+                                <a href="/approve" class="detailsButton">Approve</a>
+                                <button type="submit" class="detailsButton">Reject</button>
+                                <div class="form-group">
+                                    <label for="inputRejectionComment" class="m-2"><b>Rejection Comment:</b></label>
+                                    <input type="text" class="form-control m-2" id="inputRejectionComment"
+                                        name="inputRejectionComment" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('../partials/footer') %>

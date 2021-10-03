@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Connections</title>
+    <link rel="stylesheet" href="{% static 'task_master_app/style.css' %}">
+</head>
+<body>
+    <ul class="nav-bar">
+        <li><a href="{% url 'home' %}"><img class="nav-bar-logo" src="{% static 'task_master_app/Logo Light.png' %}"></a></li>
+        <li><a href="{% url 'tasks' profile.get_name %}">My Tasks</a></li>
+        <li><a href="{% url 'create_task' %}">Create Task</a></li>
+        <li><a href="{% url 'connections' profile.get_name %}">My Connections</a></li>
+        <li class="nav-bar-active"><a href="{% url 'add_connection' profile.get_name %}">Add Connection</a></li>
+        <li><a href="{% url 'user_details' profile.get_name %}">Account Details</a></li>
+        <li><a href="{% url 'edit_user' %}">Edit Account</a></li>
+        <li class="nav-bar-logout"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+
+    <h1>Add New Connection</h1>
+    <form class="table-form" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br/>
+        <button class="btn" type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<%- include('partials/header') %>
+
+    <%- include('partials/navigation_cust') %>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <img src="img/progressbar-3.png" alt="">
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="/registrationform3" method="POST" enctype="multipart/form-data">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputCRN">Customer Reference Number</label>
+                                        <input type="text" class="form-control" id="inputCRN" name="inputCRN"
+                                            value="<%= customer.crn %>" readonly=true>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputVIN">VIN or chassis/frame number</label>
+                                        <input type="text" class="form-control" id="inputVIN" name="inputVIN"
+                                            value="<%= inputVIN %>" readonly=true>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputGarageAddress">Vehicle's Garage Address (where the vehicle will
+                                        most often be
+                                        kept)</label>
+                                    <input type="text" class="form-control" id="inputGarageAddress"
+                                        name="inputGarageAddress" placeholder="Garage Address"
+                                        value="<%= customer.address %>">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputPlateNumber">Plate Number</label>
+                                        <input type="text" class="form-control" id="inputPlateNumber"
+                                            name="inputPlateNumber" value="<%= numberPlate %>" readonly=true>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputState">Registration State</label>
+                                        <input type="text" class="form-control" id="inputState" name="inputState"
+                                            value="NSW" readonly=true>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputFile">Proof of Registration Entitlement (PORE)</label>
+                                    <input type="file" class="form-control" id="inputFile" name="inputFile" accept="image/*"/>
+                                </div>
+                                <button type="submit" class="btn btn-dark">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('partials/footer') %>

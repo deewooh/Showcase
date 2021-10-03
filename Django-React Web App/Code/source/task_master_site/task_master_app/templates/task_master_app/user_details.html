@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Tasks</title>
+        <link rel="stylesheet" href="{% static 'task_master_app/style.css' %}">
+    </head>
+
+    <body>
+        <ul class="nav-bar">
+            <li><a href="{% url 'home' %}"><img class="nav-bar-logo" src="{% static 'task_master_app/Logo Light.png' %}"></a></li>
+            <li><a href="{% url 'tasks' profile.get_name %}">My Tasks</a></li>
+            <li><a href="{% url 'create_task' %}">Create Task</a></li>
+            <li><a href="{% url 'connections' profile.get_name %}">My Connections</a></li>
+            <li><a href="{% url 'add_connection' profile.get_name %}">Add Connection</a></li>
+            <li class="nav-bar-active"><a href="{% url 'user_details' profile.get_name %}">Account Details</a></li>
+            <li><a href="{% url 'edit_user' %}">Edit Account</a></li>
+            <li class="nav-bar-logout"><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        
+        <h1>Profile Summary</h1>
+
+        <p><b>Username:</b> {{ profile.get_name }}</p>
+        <p><b>Workload:</b> {{ profile.get_workload}}</p>
+
+        <p><b><a href="{% url 'tasks' profile.get_name %}">Assigned Tasks</a></b></p>
+    </body>
+</html>

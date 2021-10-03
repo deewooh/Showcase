@@ -1,0 +1,19 @@
+{
+    "name": "database-generator",
+    "version": "1.0.0",
+    "description": "Used to create the database used by client applications.",
+    "engines": {
+        "node": ">=12",
+        "npm": ">=5"
+    },
+    "engineStrict": true,
+    "author": "llricho",
+    "license": "Apache-2.0",
+    "scripts": {
+        "prestart": "npm install",
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "sqlite3": "^5.0.2"
+    }
+}

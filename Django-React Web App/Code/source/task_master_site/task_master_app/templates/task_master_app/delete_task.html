@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Task</title>
+    <link rel="stylesheet" href="{% static 'task_master_app/style.css' %}">
+</head>
+<body>
+    <ul class="nav-bar">
+        <li><a href="{% url 'home' %}"><img class="nav-bar-logo" src="{% static 'task_master_app/Logo Light.png' %}"></a></li>
+        <li class="nav-bar-active"><a href="{% url 'tasks' profile.get_name %}">My Tasks</a></li>
+        <li><a href="{% url 'create_task' %}">Create Task</a></li>
+        <li><a href="{% url 'connections' profile.get_name %}">My Connections</a></li>
+        <li><a href="{% url 'add_connection' profile.get_name %}">Add Connection</a></li>
+        <li><a href="{% url 'user_details' profile.get_name %}">Account Details</a></li>
+        <li><a href="{% url 'edit_user' %}">Edit Account</a></li>
+        <li class="nav-bar-logout"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+
+    <h2>Are you sure you want to delete "{{task.name}}?"</h2>
+    <p>This cannot be undone!</p>
+    <form action="{% url 'delete_task' task.id %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-delete" type="submit" name="Delete">Delete</button>
+        <a class="btn" href="{% url 'tasks' user.get_username %}">Cancel</a>
+    </form>
+</body>
+</html>
